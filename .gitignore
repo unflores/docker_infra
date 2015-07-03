@@ -1,2 +1,4 @@
 boxes/*
 .vagrant
+.knife/aust-validator.pem
+.knife/unflores.pem

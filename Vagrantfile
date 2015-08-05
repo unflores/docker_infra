@@ -46,11 +46,11 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   config.vm.synced_folder "~/projets", "/apps", type: 'nfs'
 
-  # config.vm.provision "chef_client" do |chef|
-  #   chef.chef_server_url = "https://api.opscode.com/organizations/aust"
-  #   chef.validation_key_path = File.dirname(__FILE__) + "/.knife/aust-validator.pem"
-  #   chef.client_key_path = File.dirname(__FILE__) + "/.knife/unflores.pem"
-  #   chef.node_name = "dev_unflores"
-  #   chef.validation_client_name = 'aust-validator'
-  # end
+   config.vm.provision "chef_client" do |chef|
+     chef.chef_server_url = "https://api.opscode.com/organizations/aust"
+     chef.validation_key_path = File.dirname(__FILE__) + "/.knife/aust-validator.pem"
+     chef.client_key_path = File.dirname(__FILE__) + "/.knife/unflores.pem"
+     chef.node_name = "dev_unflores"
+     chef.validation_client_name = 'aust-validator'
+   end
 end

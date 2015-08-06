@@ -1,0 +1,4 @@
+app_version="`cat ../app_word_learner/version`"
+
+docker build -t webserver ./
+docker run -d --name webserver -p <%=@port%>:<%=@port%> --link "app-${app_version}:app-${app_version}" webserver

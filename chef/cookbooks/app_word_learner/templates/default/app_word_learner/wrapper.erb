@@ -1,0 +1,2 @@
+#!/bin/bash
+ssh -i <%= @node[:app_word_learner][:keys_path] %>/<%= @app_name %>_deploy_key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $1 $2

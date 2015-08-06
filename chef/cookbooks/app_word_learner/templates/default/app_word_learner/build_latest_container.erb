@@ -1,0 +1,4 @@
+app_version="`cat version`"
+docker build -t "app-${app_version}" ./
+
+docker run -d --name app-${app_version} -v "/infra/deployment/word_learner/releases/${app_version}:/app" --link 'db:db' -p <%= @port %>:<%= @port %> "app-${app_version}"

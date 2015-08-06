@@ -1,4 +1,3 @@
 boxes/*
 .vagrant
-.chef/aust-validator.pem
-.chef/unflores.pem
+.chef/*

@@ -1,0 +1,38 @@
+FROM phusion/baseimage
+MAINTAINER Austin Flores <me@austinflores.com>
+
+RUN apt-add-repository ppa:brightbox/ruby-ng
+RUN apt-get update && apt-get dist-upgrade -qq -y
+RUN apt-get install -qq -y ruby-switch \
+  ruby2.2 \
+  build-essential \
+  ruby2.2-dev \
+  libpq-dev \
+  nodejs
+RUN ruby-switch --set ruby2.2
+
+# Ensure bundler
+RUN gem update --system --no-rdoc --no-ri
+RUN gem update --no-rdoc --no-ri
+RUN gem install --no-rdoc --no-ri bundler
+
+# Set environment details
+ENV RAILS_ENV <%= @environment %>
+ENV PORT 5000
+
+EXPOSE 5000
+
+# Install Rails App
+WORKDIR /app
+ADD Gemfile /app/Gemfile
+ADD Gemfile.lock /app/Gemfile.lock
+
+# Add default unicorn config
+ADD unicorn.rb /app/config/unicorn.rb
+
+RUN mkdir -p /etc/service/word_learner
+ADD word_learner.sh /etc/service/word_learner/run
+RUN chmod +x /etc/service/word_learner/run
+
+
+RUN cd /app && bundle

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd /app
+
+exec bundle exec unicorn -p <%= @port %> -c config/unicorn.rb \
+    >> /var/log/rails.log 2>&1
